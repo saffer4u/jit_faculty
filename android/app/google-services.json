@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "848474071119",
+    "firebase_url": "https://jit-faculty.firebaseio.com",
+    "project_id": "jit-faculty",
+    "storage_bucket": "jit-faculty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848474071119:android:f190802cd4f5ac9dbc8a3a",
+        "android_client_info": {
+          "package_name": "com.eraftab.jitfaculty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848474071119-v4c8ccrjaes7gohscvp87hvcd0v1c0st.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPkh41J_g4bHmuT_lBegmQ5ICVNGzfFEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848474071119-v4c8ccrjaes7gohscvp87hvcd0v1c0st.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848474071119-bevagv25l6sijclngchb8mlaeflgv15c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eraftab.jitfaculty"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
