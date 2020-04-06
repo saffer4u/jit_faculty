@@ -14,6 +14,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
   int cl = 0;
   int od = 0;
   int eml = 0;
+  int lwp = 0;
   int total = 0;
 
   void getleaveDetails() async {
@@ -34,7 +35,8 @@ class _UserDashBoardState extends State<UserDashBoard> {
       cl = result['cl'];
       od = result['od'];
       eml = result['eml'];
-      total = el + cl + od + eml;
+      lwp = result['lwp'];
+      total = el + cl + od + eml + lwp;
     });
   }
 
@@ -66,6 +68,10 @@ class _UserDashBoardState extends State<UserDashBoard> {
           DashboardCard(
             title: 'Emergency Leave :',
             value: eml,
+          ),
+          DashboardCard(
+            title: 'LWP :',
+            value: lwp,
           ),
           DashboardCard(
             title: 'Total :',

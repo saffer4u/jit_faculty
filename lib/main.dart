@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFFE9761E),
         scaffoldBackgroundColor: Color(0xFF6E41B7),
         textTheme: TextTheme(
-          body1: TextStyle(color: Colors.white),
+          body1: TextStyle(color: Colors.white, fontSize: 17),
         ),
       ),
       initialRoute: '/',

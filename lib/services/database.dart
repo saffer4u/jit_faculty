@@ -89,6 +89,7 @@ class Database {
       'cl': 0,
       'od': 0,
       'eml': 0,
+      'lwp': 0,
     });
     await pushNotificationUser(
         uid: user.uid,
