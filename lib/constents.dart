@@ -7,6 +7,8 @@ const kreqBubbleFontStyle = TextStyle(fontSize: 15);
 
 const kinputDecoration = InputDecoration(
   focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: kscol)),
-  labelText: 'Designation :',
+  labelText: 'Designation : *',
   labelStyle: TextStyle(color: kscol),
 );
+
+const krequiredStyle = TextStyle(color: Colors.red);

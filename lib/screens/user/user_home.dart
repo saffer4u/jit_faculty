@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jitfaculty/screens/user/leave_application.dart';
 import 'package:jitfaculty/screens/user/user_dashboard.dart';
 import 'package:jitfaculty/screens/user/user_leave_request.dart';
 import 'package:jitfaculty/screens/user/user_notification.dart';
@@ -91,7 +92,7 @@ class _UserHomeState extends State<UserHome> {
         body: TabBarView(
           children: <Widget>[
             UserDashBoard(),
-            UserLeaveRequest(),
+            LeaveApplication(uid: uid),
             UserNotification(uid: uid),
           ],
         ),
