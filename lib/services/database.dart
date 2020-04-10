@@ -60,7 +60,8 @@ class Database {
     await _firestore.document('signuprequest/$docId').delete();
   }
 
-  Future addNewUserByAdmin({String docId}) async {
+  Future addNewUserByAdmin(
+      {String docId, int el, int cl, int od, int eml, int lwp}) async {
     DocumentSnapshot newUser = await _firestore
         .collection('signuprequest')
         .document(docId)
@@ -85,31 +86,13 @@ class Database {
       'auth': type,
       'department': department,
       'branch': branch,
-      'el': 0,
-      'cl': 0,
-      'od': 0,
-      'eml': 0,
-      'lwp': 0,
+      'el': el,
+      'cl': cl,
+      'od': od,
+      'eml': eml,
+      'lwp': lwp,
     });
-    await pushNotificationUser(
-        uid: user.uid,
-        notification: 'Your account is created successfuly',
-        message: 'Welcome $name');
 
     deleteDocumentById(docId: docId);
-  }
-
-  Future pushNotificationUser(
-      {String uid, String notification, String message = ''}) async {
-    await _firestore
-        .collection('user/$uid/notification')
-        .document('${DateTime.now()}')
-        .setData({
-      'notification': notification,
-      'message': message,
-      'time': '${DateTime.now()}',
-    }).catchError((e) {
-      print(e);
-    });
   }
 }

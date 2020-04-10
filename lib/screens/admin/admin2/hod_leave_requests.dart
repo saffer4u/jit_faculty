@@ -5,12 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:jitfaculty/screens/history.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class LeaveRequests extends StatefulWidget {
+class HodLeaveRequests extends StatefulWidget {
+  final String hodBranch;
+  HodLeaveRequests({this.hodBranch});
   @override
-  _LeaveRequestsState createState() => _LeaveRequestsState();
+  _HodLeaveRequestsState createState() => _HodLeaveRequestsState();
 }
 
-class _LeaveRequestsState extends State<LeaveRequests> {
+class _HodLeaveRequestsState extends State<HodLeaveRequests> {
   bool save = false;
   void indicator() {
     setState(() {
@@ -29,7 +31,7 @@ class _LeaveRequestsState extends State<LeaveRequests> {
       child: Container(
         child: StreamBuilder<QuerySnapshot>(
           stream: Firestore.instance
-              .collection('principalreq')
+              .collection('hodreq')
               .orderBy("date", descending: true)
               .snapshots(),
           builder: (context, snapshot) {
@@ -45,7 +47,9 @@ class _LeaveRequestsState extends State<LeaveRequests> {
                   indicator: indicator,
                   docId: docId,
                 );
-                messageWidgets.add(messageWidget);
+                if (widget.hodBranch.toLowerCase() == mapOfData['branch']) {
+                  messageWidgets.add(messageWidget);
+                }
               }
               return ListView(
                 children: messageWidgets,
@@ -150,40 +154,13 @@ class RequestBubble extends StatelessWidget {
                                     Navigator.pop(context);
                                     indicator();
 
-                                    // 1 : Add to history of user.
+                                    // 1.Pushing to principal.
                                     await Firestore.instance
-                                        .collection(
-                                            'user/${data['uid']}/history')
-                                        .document(nowTime.toString())
-                                        .setData({
-                                      'type': data['type'],
-                                      'fromdate': data['fromdate'],
-                                      'todate': data['todate'],
-                                      'date': data['date'],
-                                      'appdate': nowTime.toString(),
-                                      'leavedays': data['leavedays'],
-                                    });
+                                        .collection('principalreq')
+                                        .document('$nowTime')
+                                        .setData(data);
 
-                                    // 2 : Increase days of leave in user dashboard
-                                    await Firestore.instance
-                                        .collection('user')
-                                        .document('${data['uid']}')
-                                        .updateData({
-                                      '${data['type']}':
-                                          (data['${data['type']}'] +
-                                              data['leavedays']),
-                                    });
-
-                                    // 3 : Writing Approved by Principal in application.
-                                    await Firestore.instance
-                                        .collection(
-                                            'user/${data['uid']}/applications')
-                                        .document('${data['date']}')
-                                        .updateData({
-                                      'apdbyprincipal': 'Approved',
-                                    });
-
-                                    // 4 :  Sending notification to user.
+                                    // 2.Sending notification to user.
                                     await Firestore.instance
                                         .collection(
                                             'user/${data['uid']}/notification')
@@ -193,14 +170,23 @@ class RequestBubble extends StatelessWidget {
                                       'type': data['type'].toUpperCase(),
                                       'fromdate': data['fromdate'],
                                       'todate': data['todate'],
-                                      'apdby': 'Principal',
+                                      'apdby': 'HOD',
                                       'approval': 'approved',
                                       'message': msg,
                                     });
 
-                                    // 5 : Delete document from PrincipalReq.
+                                    // 3.Writing Approved by HOD in application.
                                     await Firestore.instance
-                                        .collection('principalreq')
+                                        .collection(
+                                            'user/${data['uid']}/applications')
+                                        .document('${data['date']}')
+                                        .updateData({
+                                      'apdbyhod': 'Approved',
+                                    });
+
+                                    // 4. Delete document from hodReq.
+                                    await Firestore.instance
+                                        .collection('hodreq')
                                         .document(docId)
                                         .delete();
 
@@ -256,7 +242,7 @@ class RequestBubble extends StatelessWidget {
                                     Navigator.pop(context);
                                     indicator();
 
-                                    // Sending notification to user.
+                                    //1. Sending notification to user.
                                     await Firestore.instance
                                         .collection(
                                             'user/${data['uid']}/notification')
@@ -266,23 +252,23 @@ class RequestBubble extends StatelessWidget {
                                       'type': data['type'].toUpperCase(),
                                       'fromdate': data['fromdate'],
                                       'todate': data['todate'],
-                                      'apdby': 'Principal',
+                                      'apdby': 'HOD',
                                       'approval': 'rejected',
                                       'message': msg,
                                     });
 
-                                    // Writing Rejected by HOD in application.
+                                    //2. Writing Rejected by HOD in application.
                                     await Firestore.instance
                                         .collection(
                                             'user/${data['uid']}/applications')
                                         .document('${data['date']}')
                                         .updateData({
-                                      'apdbyprincipal': 'Rejected',
+                                      'apdbyhod': 'Rejected',
                                     });
 
-                                    // Delete document from Principal req.
+                                    // 3. Delete document from hod req.
                                     await Firestore.instance
-                                        .collection('principalreq')
+                                        .collection('hodreq')
                                         .document(docId)
                                         .delete();
 
@@ -313,7 +299,7 @@ class RequestBubble extends StatelessWidget {
                               fontSize: 15),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed(History.routeName,
+                          Navigator.pushNamed(context, History.routeName,
                               arguments: data['uid']);
                         },
                       ),

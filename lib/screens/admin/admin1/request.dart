@@ -4,6 +4,7 @@ import 'package:jitfaculty/constents.dart';
 import 'package:intl/intl.dart';
 import 'package:jitfaculty/services/database.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'dart:core';
 
 class Request extends StatefulWidget {
   @override
@@ -92,6 +93,12 @@ class RequestBubble extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    String el = '';
+    String cl = '';
+    String od = '';
+    String eml = '';
+    String lwp = '';
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       margin: EdgeInsets.symmetric(
@@ -137,7 +144,7 @@ class RequestBubble extends StatelessWidget {
                   style: kreqBubbleFontStyle,
                 ),
                 Text(
-                    'Time : ${DateFormat.yMMMMEEEEd().add_jm().format(DateTime.parse(docId))}'),
+                    'Time : ${DateFormat.yMMMd().add_jm().format(DateTime.parse(docId))}'),
               ],
             ),
           ),
@@ -151,9 +158,75 @@ class RequestBubble extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100)),
                   child: IconButton(
                     onPressed: () async {
-                      indicator();
-                      await Database().addNewUserByAdmin(docId: docId);
-                      indicator();
+//                      indicator();
+//                      await Database().addNewUserByAdmin(docId: docId);
+//                      indicator();
+
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          title: Text('Already taken leave detail of : $name'),
+                          content: Row(
+                            children: <Widget>[
+                              AlertFormField(
+                                label: 'CL',
+                                onChanged: (val) {
+                                  cl = val;
+                                },
+                              ),
+                              AlertFormField(
+                                label: 'EL',
+                                onChanged: (val) {
+                                  el = val;
+                                },
+                              ),
+                              AlertFormField(
+                                label: 'LWP',
+                                onChanged: (val) {
+                                  lwp = val;
+                                },
+                              ),
+                              AlertFormField(
+                                label: 'OD',
+                                onChanged: (val) {
+                                  od = val;
+                                },
+                              ),
+                              AlertFormField(
+                                label: 'EML',
+                                onChanged: (val) {
+                                  eml = val;
+                                },
+                              ),
+                            ],
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text('Approve'),
+                              onPressed: () async {
+                                Navigator.pop(context);
+                                indicator();
+                                await Database().addNewUserByAdmin(
+                                  docId: docId,
+                                  el: el == '' ? 0 : int.parse(el),
+                                  cl: cl == '' ? 0 : int.parse(cl),
+                                  od: od == '' ? 0 : int.parse(od),
+                                  lwp: lwp == '' ? 0 : int.parse(lwp),
+                                  eml: eml == '' ? 0 : int.parse(eml),
+                                );
+
+                                indicator();
+                              },
+                            ),
+                            FlatButton(
+                              child: Text('Cancel'),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ],
+                        ),
+                      );
                     },
                     icon: Icon(
                       Icons.check,
@@ -185,6 +258,26 @@ class RequestBubble extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AlertFormField extends StatelessWidget {
+  final String label;
+  final Function onChanged;
+
+  AlertFormField({this.onChanged, this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: TextFormField(
+        decoration: InputDecoration(
+          labelText: label,
+        ),
+        keyboardType: TextInputType.number,
+        onChanged: onChanged,
       ),
     );
   }

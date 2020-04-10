@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jitfaculty/screens/admin/admin1/admin1_home.dart';
+import 'package:jitfaculty/screens/admin/hr_home.dart';
 import 'package:jitfaculty/screens/admin/admin2/admin2_home.dart';
+import 'package:jitfaculty/screens/history.dart';
+import 'package:jitfaculty/screens/reset_password.dart';
 import 'package:jitfaculty/screens/user/user_home.dart';
 import 'package:jitfaculty/screens/user/user_leave_request.dart';
 import 'package:jitfaculty/signup/message.dart';
@@ -13,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xFFE9761E),
         scaffoldBackgroundColor: Color(0xFF6E41B7),
@@ -29,6 +33,9 @@ class MyApp extends StatelessWidget {
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
         Message.routeName: (ctx) => Message(),
         UserLeaveRequest.routeName: (ctx) => UserLeaveRequest(),
+        History.routeName: (ctx) => History(),
+        ResetPassword.routeName: (ctx) => ResetPassword(),
+        HrHome.routeName: (ctx) => HrHome(),
       },
     );
   }

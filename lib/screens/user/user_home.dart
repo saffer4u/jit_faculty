@@ -46,7 +46,9 @@ class _UserHomeState extends State<UserHome> {
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Text(nameOfUser),
+              Flexible(
+                child: Text(nameOfUser),
+              ),
               SizedBox(
                 width: 5,
               ),
@@ -58,9 +60,30 @@ class _UserHomeState extends State<UserHome> {
           ),
           actions: <Widget>[
             FlatButton.icon(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.pushReplacementNamed(context, '/');
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        title: Text('Are you sure you want to log out ?'),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('Ok'),
+                            onPressed: () async {
+                              await FirebaseAuth.instance.signOut();
+                              Navigator.pop(context);
+                              Navigator.pushReplacementNamed(context, '/');
+                            },
+                          ),
+                          FlatButton(
+                            child: Text('Cancel'),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                        ],
+                      );
+                    });
               },
               icon: Icon(
                 Icons.arrow_back_ios,

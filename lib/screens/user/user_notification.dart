@@ -27,13 +27,9 @@ class _UserNotificationState extends State<UserNotification> {
                 final messages = snapshot.data.documents;
                 List<RequestBubble> messageWidgets = [];
                 for (var message in messages) {
-                  final docId = message.reference.documentID;
-                  final notification = message.data['notification'];
-                  final msg = message.data['message'];
+                  final msg = message.data;
                   final messageWidget = RequestBubble(
-                    message: msg,
-                    notification: notification,
-                    docId: docId,
+                    data: msg,
                   );
                   messageWidgets.add(messageWidget);
                 }
@@ -53,11 +49,9 @@ class _UserNotificationState extends State<UserNotification> {
 }
 
 class RequestBubble extends StatelessWidget {
-  final String message;
-  final String docId;
-  final String notification;
+  Map<String, dynamic> data;
 
-  RequestBubble({this.message, this.notification, this.docId});
+  RequestBubble({this.data});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,16 +71,28 @@ class RequestBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            message,
-            style: TextStyle(fontSize: 25),
+            'Your leave application for ${data['type']} \nFrom : ${DateFormat.yMMMd().format(DateTime.parse(data['fromdate']))} \nTo : ${DateFormat.yMMMd().format(DateTime.parse(data['todate']))} \nis ${data['approval']} by ${data['apdby']}',
+            style: TextStyle(fontSize: 15),
           ),
-          Text(
-            notification,
-            style: TextStyle(fontSize: 18),
+          Row(
+            children: <Widget>[
+              Text(
+                'Message : ',
+                style: TextStyle(fontSize: 20),
+              ),
+              Flexible(
+                child: Text(
+                  data['message'],
+                  style: TextStyle(
+                      fontSize: 18, color: kscol, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ],
           ),
+          SizedBox(height: 10),
           Text(
-            'Time : ${DateFormat.yMMMMEEEEd().add_jm().format(DateTime.parse(docId))}',
-            style: TextStyle(color: Colors.brown),
+            'Time : ${DateFormat.yMMMMEEEEd().add_jm().format(DateTime.parse(data['time']))}',
+            style: TextStyle(color: Colors.brown, fontSize: 14),
           ),
         ],
       ),

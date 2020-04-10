@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jitfaculty/constents.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jitfaculty/screens/history.dart';
 import 'package:jitfaculty/services/database.dart';
 
 class UserDashBoard extends StatefulWidget {
@@ -16,9 +17,10 @@ class _UserDashBoardState extends State<UserDashBoard> {
   int eml = 0;
   int lwp = 0;
   int total = 0;
+  String uid;
 
   void getleaveDetails() async {
-    String uid = await FirebaseAuth.instance.currentUser().then((user) {
+    uid = await FirebaseAuth.instance.currentUser().then((user) {
       return user.uid.toString();
     });
 
@@ -53,6 +55,34 @@ class _UserDashBoardState extends State<UserDashBoard> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            width: double.infinity,
+            child: RaisedButton(
+              color: kpcol,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Text(
+                  'Leave History',
+                  style: TextStyle(
+                      fontSize: 20,
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, History.routeName, arguments: uid);
+              },
+            ),
+          ),
+          Divider(
+            color: kpcol,
+            indent: 40,
+            endIndent: 40,
+          ),
           DashboardCard(
             title: 'Earn Leave :',
             value: el,
@@ -77,11 +107,38 @@ class _UserDashBoardState extends State<UserDashBoard> {
             title: 'Total :',
             value: total,
           ),
+//          Container(
+//            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+//            child: FloatingActionButton(
+//              child: Icon(Icons.refresh),
+//              backgroundColor: kpcol,
+
+//              },
+//            ),
+//          ),
+          Divider(
+            color: kpcol,
+            indent: 40,
+            endIndent: 40,
+          ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: FloatingActionButton(
-              child: Icon(Icons.refresh),
-              backgroundColor: kpcol,
+            width: double.infinity,
+            child: RaisedButton(
+              color: kpcol,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Text(
+                  'Refresh',
+                  style: TextStyle(
+                      fontSize: 20,
+                      letterSpacing: 3,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+              ),
               onPressed: () {
                 setState(() {
                   getleaveDetails();
@@ -104,7 +161,7 @@ class DashboardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

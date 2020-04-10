@@ -16,7 +16,7 @@ class _LeaveApplicationState extends State<LeaveApplication> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        SizedBox(height: 5),
+        SizedBox(height: 10),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           width: double.infinity,
