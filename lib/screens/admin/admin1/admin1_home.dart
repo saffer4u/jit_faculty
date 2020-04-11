@@ -72,7 +72,7 @@ class _Admin1HomeState extends State<Admin1Home> {
                             onPressed: () async {
                               await FirebaseAuth.instance.signOut();
                               Navigator.pop(context);
-                              Navigator.pushReplacementNamed(context, '/');
+//                              Navigator.pushReplacementNamed(context, '/');
                             },
                           ),
                           FlatButton(

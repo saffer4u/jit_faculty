@@ -11,6 +11,7 @@ import 'package:jitfaculty/services/auth.dart';
 import 'package:jitfaculty/services/database.dart';
 import 'package:jitfaculty/signup/signup_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -128,50 +129,50 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                           .signIn(
                                               email: email, password: password);
 
-                                      String userType = await Database()
-                                          .getUserInfo(
-                                              uid: user.uid, doc: 'auth');
-
-                                      if (user != null) {
-                                        setState(() {
-                                          saving = false;
-                                        });
-
-                                        switch (userType) {
-                                          case 'principal':
-                                            {
-                                              Navigator.pushReplacementNamed(
-                                                  context,
-                                                  Admin1Home.routeName);
-                                              break;
-                                            }
-                                          case 'hod':
-                                            {
-                                              Navigator.pushReplacementNamed(
-                                                  context,
-                                                  Admin2Home.routeName);
-                                              break;
-                                            }
-                                          case 'faculty':
-                                            {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed(
-                                                      UserHome.routeName);
-                                              break;
-                                            }
-                                          case 'hr':
-                                            {
-                                              Navigator.of(context)
-                                                  .pushReplacementNamed(
-                                                      HrHome.routeName);
-                                            }
-                                        }
-                                      } else {
-                                        print('Error Occured');
-                                        setState(() {
-                                          saving = false;
-                                        });
-                                      }
+//                                      String userType = await Database()
+//                                          .getUserInfo(
+//                                              uid: user.uid, doc: 'auth');
+//
+//                                      if (user != null) {
+//                                        setState(() {
+//                                          saving = false;
+//                                        });
+//
+//                                        switch (userType) {
+//                                          case 'principal':
+//                                            {
+//                                              Navigator.pushReplacementNamed(
+//                                                  context,
+//                                                  Admin1Home.routeName);
+//                                              break;
+//                                            }
+//                                          case 'hod':
+//                                            {
+//                                              Navigator.pushReplacementNamed(
+//                                                  context,
+//                                                  Admin2Home.routeName);
+//                                              break;
+//                                            }
+//                                          case 'faculty':
+//                                            {
+//                                              Navigator.of(context)
+//                                                  .pushReplacementNamed(
+//                                                      UserHome.routeName);
+//                                              break;
+//                                            }
+//                                          case 'hr':
+//                                            {
+//                                              Navigator.of(context)
+//                                                  .pushReplacementNamed(
+//                                                      HrHome.routeName);
+//                                            }
+//                                        }
+//                                      } else {
+//                                        print('Error Occured');
+//                                        setState(() {
+//                                          saving = false;
+//                                        });
+//                                      }
                                     }
                                   }),
                             ),
@@ -239,7 +240,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 12, color: Colors.black54),
                   ),
-                )
+                ),
+//                RaisedButton(
+//                  child: Text('admin'),
+//                  onPressed: () async {
+//                    String id = DateTime.now().toString();
+//                    await Firestore.instance
+//                        .collection('users_registrations')
+//                        .document(id)
+//                        .setData({
+//                      'email': 'a@4u.com',
+//                      'password': '123456',
+//                      'cl': 10,
+//                      'id': id,
+//                    });
+//                  },
+//                ),
               ],
             ),
           ),

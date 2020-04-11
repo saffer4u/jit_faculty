@@ -150,11 +150,11 @@ class _UserLeaveRequestState extends State<UserLeaveRequest> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Expanded(child: Text('Name : $name')),
-                        Expanded(
-                            child: Text('DepartMent : ${dept.toUpperCase()}')),
+//                        Expanded(
+//                            child: Text('DepartMent : ${dept.toUpperCase()}')),
                       ],
                     ),
-                    Text('Branch : ${branch.toUpperCase()}'),
+                    Text('Department : ${branch.toUpperCase()}'),
                     SizedBox(height: 20),
                     Text('Taken leave details : ',
                         style: TextStyle(fontSize: 20)),
@@ -1330,7 +1330,7 @@ class _UserLeaveRequestState extends State<UserLeaveRequest> {
                                       'date': nowDate,
                                       'uid': uid,
                                       'name': name,
-                                      'department': dept,
+//                                      'department': dept,
                                       'branch': branch,
                                       'el': el,
                                       'cl': cl,

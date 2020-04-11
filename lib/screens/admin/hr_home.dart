@@ -23,9 +23,11 @@ class _HrHomeState extends State<HrHome> {
       return user.uid.toString();
     });
     String user = await Database().getUserInfo(uid: uid, doc: 'name');
-    setState(() {
-      nameOfUser = user;
-    });
+    if (this.mounted) {
+      setState(() {
+        nameOfUser = user;
+      });
+    }
   }
 
   @override
@@ -60,7 +62,7 @@ class _HrHomeState extends State<HrHome> {
                           onPressed: () async {
                             await FirebaseAuth.instance.signOut();
                             Navigator.pop(context);
-                            Navigator.pushReplacementNamed(context, '/');
+//                            Navigator.pushReplacementNamed(context, '/');
                           },
                         ),
                         FlatButton(

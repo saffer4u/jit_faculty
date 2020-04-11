@@ -26,4 +26,9 @@ class Authenticate {
       print(e);
     }
   }
+
+  // auth change user stream.
+  Stream<FirebaseUser> get userAuthState {
+    return _auth.onAuthStateChanged;
+  }
 }

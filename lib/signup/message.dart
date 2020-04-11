@@ -11,13 +11,16 @@ class Message extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Your sign up request is successful, You\'ll get a notification when your request will be approved.\n (Please do not request multiple time.)',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Your sign up request is successful, You\'ll get a notification when your request will be approved.\n (Please do not request multiple time.)',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
             FlatButton(
               child: Container(

@@ -107,7 +107,7 @@ class RequestBubble extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: kpcol,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           new BoxShadow(
             color: Colors.black54,
@@ -131,16 +131,16 @@ class RequestBubble extends StatelessWidget {
                   'Email : $email',
                   style: kreqBubbleFontStyle,
                 ),
+//                Text(
+//                  'User type : ${type.toUpperCase()}',
+//                  style: kreqBubbleFontStyle,
+//                ),
+//                Text(
+//                  'Department : ${department.toUpperCase()}',
+//                  style: kreqBubbleFontStyle,
+//                ),
                 Text(
-                  'User type : ${type.toUpperCase()}',
-                  style: kreqBubbleFontStyle,
-                ),
-                Text(
-                  'Department : ${department.toUpperCase()}',
-                  style: kreqBubbleFontStyle,
-                ),
-                Text(
-                  'Branch : ${branch.toUpperCase()}',
+                  'Department : ${branch.toUpperCase()}',
                   style: kreqBubbleFontStyle,
                 ),
                 Text(
@@ -236,7 +236,7 @@ class RequestBubble extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -245,7 +245,28 @@ class RequestBubble extends StatelessWidget {
                   child: IconButton(
                     splashColor: Colors.brown,
                     onPressed: () {
-                      Database().deleteDocumentById(docId: docId);
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              title: Text('Are you sure you want to reject'),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text('Ok'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Database().deleteDocumentById(docId: docId);
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text('Cancel'),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ],
+                            );
+                          });
                     },
                     icon: Icon(
                       Icons.clear,

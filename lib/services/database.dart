@@ -77,14 +77,32 @@ class Database {
     String department = newUser.data['department'].toString();
     String branch = newUser.data['branch'].toString();
 
-    FirebaseUser user = await Authenticate()
-        .signUpWithEmailAndPassword(email: email, password: password);
+//    FirebaseUser user = await Authenticate()
+//        .signUpWithEmailAndPassword(email: email, password: password);
+//
+//    await _firestore.collection('user').document(user.uid).setData({
+//      'name': name,
+//      'email': email,
+//      'auth': type,
+//      'department': department,
+//      'branch': branch,
+//      'el': el,
+//      'cl': cl,
+//      'od': od,
+//      'eml': eml,
+//      'lwp': lwp,
+//    });
 
-    await _firestore.collection('user').document(user.uid).setData({
+    String id = DateTime.now().toString();
+    await Firestore.instance
+        .collection('users_registrations')
+        .document(id)
+        .setData({
+      'id': id,
       'name': name,
       'email': email,
+      'password': password,
       'auth': type,
-      'department': department,
       'branch': branch,
       'el': el,
       'cl': cl,
@@ -93,6 +111,6 @@ class Database {
       'lwp': lwp,
     });
 
-    deleteDocumentById(docId: docId);
+    await deleteDocumentById(docId: docId);
   }
 }

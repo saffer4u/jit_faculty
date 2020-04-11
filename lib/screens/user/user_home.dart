@@ -16,6 +16,7 @@ class UserHome extends StatefulWidget {
 class _UserHomeState extends State<UserHome> {
   String nameOfUser = '';
   String userType = '';
+  String branch = '';
   String uid;
 
   @override
@@ -30,9 +31,11 @@ class _UserHomeState extends State<UserHome> {
     });
     String user = await Database().getUserInfo(uid: uid, doc: 'name');
     String type = await Database().getUserInfo(uid: uid, doc: 'auth');
+    String dpt = await Database().getUserInfo(uid: uid, doc: 'branch');
     setState(() {
       nameOfUser = user;
       userType = type.toUpperCase();
+      branch = dpt.toUpperCase();
     });
   }
 
@@ -53,7 +56,7 @@ class _UserHomeState extends State<UserHome> {
                 width: 5,
               ),
               Text(
-                userType,
+                '$userType ( $branch )',
                 style: TextStyle(fontSize: 10),
               ),
             ],
@@ -74,7 +77,7 @@ class _UserHomeState extends State<UserHome> {
                             onPressed: () async {
                               await FirebaseAuth.instance.signOut();
                               Navigator.pop(context);
-                              Navigator.pushReplacementNamed(context, '/');
+//                              Navigator.pushReplacementNamed(context, '/');
                             },
                           ),
                           FlatButton(

@@ -60,7 +60,7 @@ class RequestBubble extends StatelessWidget {
           children: <Widget>[
             Text('Name : ${data['name']}'),
             Text('Email : ${data['email']}'),
-            Text('Department : ${data['department'].toUpperCase()}'),
+            Text('Department : ${data['branch'].toUpperCase()}'),
             SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

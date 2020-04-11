@@ -24,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   String type = 'Faculty';
 
-  String department;
+  String department = 'jit';
 
   String branch;
 
@@ -134,49 +134,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
-
-                        // Department
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text('Department : '),
-                            DropdownButton<String>(
-                              value: department,
-                              icon: Icon(
-                                Icons.arrow_downward,
-                                color: Colors.white,
-                              ),
-                              iconSize: 24,
-                              elevation: 16,
-                              style: TextStyle(
-                                  color: kpcol, fontWeight: FontWeight.w700),
-                              underline: Container(
-                                height: 2,
-                                color: kscol,
-                              ),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  department = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'B.Tech',
-                                'Diploma',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ),
-
-                        // Branch
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text('Branch : '),
                             DropdownButton<String>(
                               value: branch,
                               icon: Icon(
@@ -210,6 +171,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
+
+                        // Department
+//                        Row(
+//                          mainAxisAlignment: MainAxisAlignment.center,
+//                          children: <Widget>[
+//                            Text('Department : '),
+//                            DropdownButton<String>(
+//                              value: department,
+//                              icon: Icon(
+//                                Icons.arrow_downward,
+//                                color: Colors.white,
+//                              ),
+//                              iconSize: 24,
+//                              elevation: 16,
+//                              style: TextStyle(
+//                                  color: kpcol, fontWeight: FontWeight.w700),
+//                              underline: Container(
+//                                height: 2,
+//                                color: kscol,
+//                              ),
+//                              onChanged: (String newValue) {
+//                                setState(() {
+//                                  department = newValue;
+//                                });
+//                              },
+//                              items: <String>[
+//                                'B.Tech',
+//                                'Diploma',
+//                              ].map<DropdownMenuItem<String>>((String value) {
+//                                return DropdownMenuItem<String>(
+//                                  value: value,
+//                                  child: Text(value),
+//                                );
+//                              }).toList(),
+//                            ),
+//                          ],
+//                        ),
+
+                        // Branch
 
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
