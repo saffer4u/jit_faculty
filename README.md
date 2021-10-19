@@ -1,16 +1,13 @@
-# jitfaculty
+# JitFaculty
 
-JIT Faculty for leave management
+JIT Faculty flutter app for leave management.
 
-## Getting Started
+Flutter app for JIT faculties to take leave online since it is not in use, I've decided to publish its repo so that anyone can visit and see the internal working of the application.
 
-This project is a starting point for a Flutter application.
+Take a look at code and if you like give this repo a `Star`
 
-A few resources to get you started if this is your first Flutter project:
+### App Preview : 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![](https://raw.githubusercontent.com/saffer4u/notes/master/uPic/JIT%20faculty(%202021-10-19%20)%20(%2023:54:14%20).gif)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
