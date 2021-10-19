@@ -1,6 +1,6 @@
 # JitFaculty
 
-JIT Faculty flutter app for leave management.
+
 
 Flutter app for JIT faculties to take leave online since it is not in use, I've decided to publish its repo so that anyone can visit and see the internal working of the application.
 
