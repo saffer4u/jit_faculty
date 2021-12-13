@@ -2,7 +2,7 @@
 
 
 
-Flutter app for JIT faculties to take leave online since it is not in use, I've decided to publish its repo so that anyone can visit and see the internal working of the application.
+Flutter app for JIT faculties to take leave online since it is not in use, We have decided to publish its repo so that anyone can visit and see the internal working of the application.
 
 Take a look at code and if you like give this repo a `Star`
 
